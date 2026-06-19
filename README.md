@@ -31,7 +31,7 @@ anime_dashboard/
 ├── .streamlit/
 │   └── config.toml
 └── data/
-    └── anime_dataset_final.csv   ← você precisa colocar este arquivo aqui
+    └── anime_dataset_final.csv   ← meninas vocês precisam colocar este arquivo aqui
 ```
 
 ### 2. Abra a pasta no VSCode
@@ -68,6 +68,10 @@ CSV pela barra lateral assim que abrir.
 
 ### 6. Rode o dashboard
 
+Primeiro, você precisa verificar o `arquivo converter.py`, na pasta onde ele estiver rode: `python converter.py`. Estamos convertendo o csv para parquer, assim não fica tão pesado e roda mais fácil no streamlit.
+Depois você pode iniciar a aplicação: `python -m streamlit run app.py`
+
+
 ```bash
 streamlit run app.py
 ```
@@ -77,16 +81,6 @@ no terminal.
 
 ---
 
-## Personalizando
-
-- **Cores**: estão centralizadas no topo de `app.py` (`COR_DESTAQUE`, `COR_SECUNDARIA`,
-  `COR_BG`, etc.) e também em `.streamlit/config.toml` (controla os widgets nativos do
-  Streamlit, como botões e sliders). Mude nos dois lugares para manter consistência.
-- **Quantidade mínima de títulos por gênero/estúdio** para entrar nos gráficos: ajuste
-  os parâmetros `min_qtd` em `chart_top_genres()` e `chart_studios()`.
-- **Novos filtros ou KPIs**: siga o padrão das funções `build_sidebar()`,
-  `apply_filters()` e `render_kpis()` — cada filtro vira uma entrada no dicionário
-  `filters` e é tratado em `apply_filters`.
 
 ## Caso suas colunas tenham nomes diferentes
 
@@ -97,11 +91,3 @@ diferente na sua base, ajuste as referências correspondentes em `app.py` (cada 
 já tem uma verificação `if "coluna" not in df.columns` que evita quebrar o app —
 mas exibirá um aviso ao invés do gráfico).
 
-## Próximos passos (opcional)
-
-- **Publicar online de graça**: suba o projeto para o GitHub e publique em
-  [Streamlit Community Cloud](https://share.streamlit.io) — basta apontar para o
-  `app.py` e o `requirements.txt`.
-- **Cache mais agressivo**: já está usando `@st.cache_data` no carregamento; para bases
-  muito grandes, considere salvar uma versão pré-processada em `.parquet` para acelerar
-  a leitura.
